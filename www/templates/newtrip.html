@@ -1,0 +1,264 @@
+<ion-view class="dark-bg newtrip-view">
+
+
+    <ion-nav-bar class="dark-bg">
+        <ion-nav-back-button class="dark-bg">
+        </ion-nav-back-button>
+
+        <ion-nav-buttons side="left">
+            <button class="button button-icon dark-bg ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+
+        <ion-nav-title>
+            <span>{{page.title}}</span>
+        </ion-nav-title>
+        <div class="search-block header-item">
+            <input type="text">
+        </div>
+
+
+        <ion-header-bar class="bar-subheader item-input-inset" ng-if="AllDataLoaded">
+            <label class="item-input-wrapper">
+                <input type="search" placeholder="Search eg.: Ljubljana" ng-model="search.name"
+                       ng-change="mayBeShowSearchRes()">
+                <!--<i class="icon ion-ios-search placeholder-icon"></i>-->
+
+                <img ng-src="img/search.png" class="placeholder-icon">
+            </label>
+
+        </ion-header-bar>
+
+        <ion-nav-buttons side="right">
+            <button class="button button-icon dark-bg ion-gear-a" menu-toggle="right" ng-if="true">
+            </button>
+        </ion-nav-buttons>
+
+    </ion-nav-bar>
+
+    <ion-content class="dark-bg" overflow-scroll="false">
+
+        <div ng-show="showmain && AllDataLoaded" class="newtrip-page-inner">
+
+            <div class="searchresult" ng-if="show_search_res">
+
+                <div class="browseall-selector-inner" ng-click="toggleShowSearchRes()">
+                    <div class="row browse-row">
+                        <div class="image">
+                            <img src="img/browse_region.jpg">
+                            <span class="browse-desc region" >
+                              <h2>Switch To Region View</h2>
+
+                               <span>Everything we have to offer,<br> grouped by region
+                                   </span>
+
+
+                                 </span>
+                        </div>
+                    </div>
+                </div>
+
+                <ion-list class="poi-list all-pois" ng-repeat="poi in poiUniqList
+                 | orderBy : name_distance_order | filter: search : false
+                 | filter:filterByTypeByID | filter: filterByDuration
+
+">
+                    <div class="item item-text-wrap item-poi" ng-click="" ng-if="poi.name != ''">
+
+                        <div class="image" ng-click="poiDetailShow(poi.id)">
+                            <img src="img/image-not-avail.jpg" err-src="img/image-not-avail.jpg"
+                                 ion-img-cache ng-src="{{baseURL+poi.image_medium}}">
+
+                            <small class="poi-desc-small">
+                                {{poi.headline}}
+                            </small>
+
+                        </div>
+
+                        <div class="poi-add-row">
+                            <div class="poi-add">
+                                <img class="poi-add-button"
+                                     ng-src="{{inTripList(poi.id)?
+                                              'img/add-poi-galka.png' : 'img/add-poi-plus.png'}}"
+                                     ng-click="toggleAddPoiToTrip(poi.id);$event.stopPropagation()"
+                                >
+                            </div>
+                        </div>
+
+
+                        <div class="poi-desc-row">
+                            <div class="poi-name">{{poi.name}} <span class="seen"
+                                                                     ng-if="inSeen(poi.id)">seen</span>
+                            </div>
+                            <div class="poi-type">{{poi.type_name}}
+                                <span class="superpink-color coupon-tag" ng-if="poi.partner_id>0">Special Offer <i
+                                        class="ion-ios-pricetags"></i></span></div>
+                        </div>
+
+                    </div>
+                </ion-list>
+                <br><br>
+            </div>
+        </div>
+
+
+        <div class="list go-down dark-bg newtrip-list" ng-show="!show_search_res && AllDataLoaded">
+
+            <div class="intro" ng-click="doTheTrack();"><h3>Choose your destination</h3>
+                Choose the region that you'd like to discover,<br>
+                from the list below.
+            </div>
+            <div class="browseall-selector-inner" ng-click="toggleShowSearchRes()">
+                <div class="row browse-row">
+                    <div class="image">
+                        <img src="img/browse_all.jpg">
+                        <span class="browse-desc">
+                              <h2>Browse All</h2>
+
+                               <span>Everything we have to offer,<br>
+                                   regardless of region</span>
+
+
+                                 </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <span ng-repeat="item in city_tree" ng-include="'groups_renderer'">
+            </span>
+        </div>
+
+        </div>
+    </ion-content>
+
+
+    <div class="bar bar-footer " ng-show="showmain">
+
+        <div class="warning-message row" ng-show="((TripTimeSec+VisitSum)>=(time_for_visit*60*60))">
+            <div class="inner">You exceeded your time!</div>
+        </div>
+        <div class="warning-message row trip-time" ng-show="((TripTimeSec+VisitSum)<(time_for_visit*60*60))">
+            <div class="inner white-color"></div>
+            Trip time:
+        </div>
+        <div class="time-begun  row">
+
+            <div class="inner" ng-class="((TripTimeSec+VisitSum)>=(time_for_visit*60*60))? 'red-color': 'green-color'">
+                {{seconds2time(TripTimeSec+VisitSum)}}
+            </div>
+
+        </div>
+        <div id="trip-duration-progress" class="trip-duration-bar"></div>
+        <div class="bottom-button row">
+
+            <a href="#/app/mapview" menu-close class="full-width">
+                <button class=" button button-full full-width"
+                >View Map
+                </button>
+            </a>
+        </div>
+
+
+        <!--
+                <button class=" button button-full full-width"
+                        ng-click="compaso()"
+                >View Map{{trueHeading}}
+                </button>
+
+        -->
+    </div>
+
+
+</ion-view>
+
+
+<!-- Group Renderer -->
+
+<script type="text/ng-template" id="groups_renderer">
+
+    <ion-item class="item item-dark item-accordeon item-text-wrap depth-{{item.depth}} "
+              ng-click="emitEvent(item); toggleShow(item); "
+              ng-include="'item_default_renderer'">
+    </ion-item>
+
+    <ion-list ng-model="item.children"
+              ng-repeat="item in item.children"
+              ng-show="!item.collapsed && item.pois.length > 0"
+              ng-include="'groups_renderer'">
+    </ion-list>
+
+</script>
+
+
+<!-- Item Default Renderer --->
+<script type="text/ng-template" id="item_default_renderer">
+
+    <div class="row city-row">
+        <div class="image">
+            <img src="img/image-not-avail.jpg" err-src="img/image-not-avail.jpg" ion-img-cache ng-src="{{baseURL+item.image_medium
+            }}"
+                 alt="" ng-show="item.image_thumb">
+            <span class="city-desc" ng-click="list_by_distance=!list_by_distance">
+            <h2>{{item.name}}
+
+            </h2>
+                 <small class="city-desc-small">
+                {{item.headline}}
+            </small>
+                    <div class="" ng-class="item.headline===''?'upup-symbol':'symbol'">
+                        <i class="icon icon-4x"
+                           ng-class="plusOrMinus(item)?
+                    'ion-ios-plus-empty' : 'ion-ios-minus-empty'"></i>
+                    </div>
+            </span>
+        </div>
+
+    </div>
+    <ion-list class="item-accordion item-stable"
+              ng-repeat="poi in item.pois  | orderBy: name_distance_order  | filter: filterByTypeByPID | filter: filterByDurationByPID"
+              ng-show="( isPoiShown(item) && !item.children.collapsed ) "
+              ng-include="'poi_renderer'">
+
+    </ion-list>
+</script>
+
+
+<!-- POI Renderer -->
+<script type="text/ng-template" id="poi_renderer">
+
+    <div class="item item-text-wrap item-poi item-thumbnail-left"
+         ng-click="poiDetailShow(poi.id);$event.stopPropagation()">
+
+        <div class="image">
+            <img src="img/image-not-avail.jpg" err-src="img/image-not-avail.jpg"
+                 ion-img-cache ng-src="{{baseURL+poiDataList[poi.id].image_medium}}">
+            <span class="city-desc">
+                 <small class="poi-desc-small">
+                {{item.headline}}
+            </small>
+
+            </span>
+        </div>
+        <div class="poi-add-row">
+            <div class="poi-add">
+                <img class="poi-add-button"
+                     ng-src="{{inTripList(poi.id)?
+                    'img/add-poi-galka.png' : 'img/add-poi-plus.png'}}"
+                     ng-click="toggleAddPoiToTrip(poi.id);$event.stopPropagation()"
+                >
+            </div>
+        </div>
+        <div class="poi-desc-row">
+            <div class="poi-name">{{poiDataList[poi.id].name}} <span class="seen" ng-if="inSeen(poi.id)">seen</span>
+            </div>
+            <div class="poi-type">{{poiDataList[poi.id].type_name}}
+                <span class="superpink-color coupon-tag" ng-if="poiDataList[poi.id].partner_id>0">Special Offer <i
+                        class="ion-ios-pricetags"></i></span></div>
+        </div>
+
+    </div>
+
+
+</script>
+

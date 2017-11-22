@@ -1,0 +1,17 @@
+<ion-view title="POI Detail" class="stable">
+
+
+
+
+    <ion-content class="dark-bg">
+
+        <ul class="list">
+            <li class="item" ng-repeat="city in cities" ng-click="citySelected(city);closeCitySelect()">
+                {{city.name}}
+            </li>
+        </ul>
+
+
+    </ion-content>
+
+</ion-view>

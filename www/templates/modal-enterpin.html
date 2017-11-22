@@ -1,0 +1,144 @@
+<ion-view title="Enter manager PIN" class="stable" ng-controller="EnterManagerPinCtrl">
+
+
+    <ion-header-bar class="header dark-bg stable tripdetail-header">
+        <h1 class="title stable">{{poi.name}}</h1>
+        <div class="buttons pull-right">
+            <button class=" button button-stable button-icon icon-right ion-android-close"
+                    ng-click="closeEnterPIN();goBackToPin();"
+            ></button>
+        </div>
+    </ion-header-bar>
+
+
+    <ion-content class="enterpin" ng-class="showthankyou?'successful':''"
+                 ng-click="showthankyou?'goBackToPin();closeEnterPIN()':''"
+                 overflow-scroll="false">
+
+        <div class="" ng-if="!nextstep&&!showthankyou">
+            <div class="poloski">
+                <div class="row row-asteriscs">
+                    <div class="asterisk asterisk-4 col-100" ng-if="pinarray.length==0">&nbsp;</div>
+                    <div class="asterisk asterisk-1 col-25" ng-if="pinarray.length>3">*</div>
+                    <div class="asterisk asterisk-2 col-25" ng-if="pinarray.length>2">*</div>
+                    <div class="asterisk asterisk-3 col-25" ng-if="pinarray.length>1">*</div>
+                    <div class="asterisk asterisk-4 col-25" ng-if="pinarray.length>0">*</div>
+                </div>
+                <div class="row row-dashes">
+                    <div class="dash col-25">_</div>
+                    <div class="dash col-25">_</div>
+                    <div class="dash col-25">_</div>
+                    <div class="dash col-25">_</div>
+                </div>
+            </div>
+
+            <div class="dial-buttons">
+                <div class="row">
+                    <div class="col-33" ng-click="dial(1)">
+                        <div class="numbutton">1</div>
+                    </div>
+                    <div class="col-33" ng-click="dial(2)">
+                        <div class="numbutton">2</div>
+                    </div>
+                    <div class="col-33" ng-click="dial(3)">
+                        <div class="numbutton">3</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-33" ng-click="dial(4)">
+                        <div class="numbutton">4</div>
+                    </div>
+                    <div class="col-33" ng-click="dial(5)">
+                        <div class="numbutton">5</div>
+                    </div>
+                    <div class="col-33" ng-click="dial(6)">
+                        <div class="numbutton">6</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-33" ng-click="dial(7)">
+                        <div class="numbutton">7</div>
+                    </div>
+                    <div class="col-33" ng-click="dial(8)">
+                        <div class="numbutton">8</div>
+                    </div>
+                    <div class="col-33" ng-click="dial(9)">
+                        <div class="numbutton">9</div>
+                    </div>
+                </div>
+                <div class="row lastrow">
+                    <div class="col-33">
+                        <div class="numbutton empty"></div>
+                    </div>
+                    <div class="col-33" ng-click="dial(0)">
+                        <div class="numbutton">0</div>
+                    </div>
+                    <div class="col-33">
+                        <div class="numbutton empty"></div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="" ng-if="nextstep&&!showspin&&!showthankyou">
+            <div class="button goback-askup button-icon ion-ios-arrow-thin-left light"
+                 ng-click="goBackToPin()"
+            ></div>
+            <div class="ask-up row">
+                <div class="text col-100">How many people<br> has visited?</div>
+            </div>
+
+            <div class="row numguests">
+                <div class="col-100">
+                    <div class="button-minus"
+                         ng-click="dominus()"
+                    >-
+                    </div>
+                    <div class="numbutton">{{numguest}}</div>
+                    <div class="button-plus"
+                         ng-click="doplus()"
+                    >+
+                    </div>
+                </div>
+
+            </div>
+            <div class="backguestbutton">
+                <img src="img/backnumguest.png">
+            </div>
+            <div class="row guests">
+                <div class="col-100">
+                    {{numguest>1?'Guests':numguest==1?'Guest':''}}
+                </div>
+            </div>
+        </div>
+
+
+        <div id="man-spinner" ng-if="showspin&&!showthankyou"><span us-spinner="{radius:30, width:8, length: 16, top: 250}"></span>
+        </div>
+
+        <div id="thank-you" ng-if="showthankyou" ng-click="goBackToPin();closeEnterPIN();">
+            <h1 class="h0">Thank you</h1>
+
+            Your order is now complete.<br>
+            Please, <span class="red-u">keep the receipt!</span>
+            <div class="bottom-exit">
+                Tap to exit
+            </div>
+        </div>
+
+
+    </ion-content>
+
+
+    <div ng-if="numguest>0&&!showthankyou" class="bar bar-footer footer-green dark-bg full-button-footer ">
+        <a href="" class="full-width">
+            <button class=" button button-full full-width" id="button-green"
+                    ng-click="sendPINsendNum()"
+            >Done
+            </button>
+        </a>
+    </div>
+
+
+</ion-view>

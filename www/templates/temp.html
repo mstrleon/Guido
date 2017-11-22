@@ -1,0 +1,67 @@
+
+<div> <button class="button-icon close-map-message icon ion-android-close button-small stable go-down" ng-click="minimiseFooter()"
+              ng-if="footer_tall"></button></div>
+
+
+<div class="message-footer-container row" ng-if="footer_tall">
+
+    <div class="footer-message col-100" ng-if="showmessage"> <!--if show_message==true-->
+        {{footerMessage}}
+    </div>
+
+
+    <!--<div class="item item-slider">-</div>-->
+    <div class="item-thumbnail-left row" ng-click="poiDetailShow(poi.id)"
+         ng-if="!showmessage && footer_tall"><!--if show_message==false && footer_tall==true-->
+        <img src="img/image-not-avail.jpg" err-src="img/image-not-avail.jpg"
+             ion-img-cache ng-src="{{baseURL+poiDataList[poi.id].image_thumb}}" alt="">
+        <!--Distance in km/mi according to route-->
+        <div class=row">
+            <div class="col-center"> {{poiDataList[poi.id].name}}</div>
+        </div>
+        <div class="row">
+            <small><!--<i ng-class="'fa fa-{{markerTypes[poiDataList[poi.id].poi_type_id].icon}}'"></i>-->
+                {{poiDataList[poi.id].type_name}}
+                <span class="superpink-color coupon-tag" ng-if="poiDataList[poi.id].partner_id>0">Special Offer <i
+                        class="ion-ios-pricetags"></i></span>
+                <br>({{poi.distance}} km)
+            </small>
+        </div>
+    </div>
+</div>
+<p>&nbsp;</p>
+
+<div class="button-footer-container row">
+    <div class="trip-dist col-20">
+        {{(TripDistance)}} <span ng-if="(TripDistance>0)">km</span><br>
+        {{TripTime}}
+    </div>
+    <div class="col-80" ng-if="showmessage || (!showmessage&&!footer_tall&&TripList.length>0)">
+        <button class="button icon ion-map button-dark" id="navigate-google" ng-click="showPoiRedirectPopup()">
+            <span style="">   Navigate in {{NativeMapApp}}</span>
+        </button>
+    </div>
+    <div class="col-40" ng-if="!showmessage && footer_tall">
+        <button ng-if="inTripList(poi.id)" class="button icon full-width ion-ios-checkmark button-balanced"
+                ng-click="toggleAddPoiToTrip(poi.id);$event.stopPropagation()"
+        >In Current Trip
+        </button>
+        <button ng-else class="button icon ion-ios-plus-outline full-width button-dark"
+                ng-click="toggleAddPoiToTrip(poi.id);$event.stopPropagation()">
+            Add to Trip
+        </button>
+    </div>
+
+
+    <div class="col-40" ng-if="!showmessage && footer_tall">
+        <button class="button button-stable" id="take_me"
+                ng-click="takeMeThere(poi.id)"
+        >Take me there
+            <span ng-if="inTripList(poi.id)">first</span>
+        </button>
+    </div>
+
+</div>
+
+
+</div>

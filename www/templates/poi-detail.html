@@ -1,0 +1,185 @@
+<ion-view title="POI Detail" class="stable poi-detail">
+    <div class="gradient">&nbsp;</div>
+    <ion-header-bar class="header dark-bg stable">
+
+        <div class="pull-left backbutton" ng-click="$ionicGoBack();"><i class="ion-ios-arrow-back"></i> Back</div>
+
+
+        <h1 class="title stable">{{poi.parent}}</h1>
+
+        <div class="pull-right distance">
+            <small>{{poi.distance}} km</small>
+        </div>
+
+
+    </ion-header-bar>
+
+
+    <ion-content class="dark-bg poi-detail poi-detail-content" overflow-scroll="false">
+
+
+        <div>
+
+            <div ng-include="'poi_gallery_renderer'"></div>
+
+            <div class="poi-fav" ng-class="poi.gallery.length>0?'':'poi-add-down'">
+                <div ng-if = "inFavorites(poi.id);"
+                     class="poi-fav-inner fav-full"
+                     ng-click="removeFavorite(poi.id);$event.stopPropagation()"
+                ><i class = "ion-ios-heart reddy"></i>
+                </div>
+
+                <div ng-else class="poi-fav-inner fav-empty"
+                     ng-click="addFavorite(poi.id);$event.stopPropagation()"
+                ><i class = "ion-ios-heart-outline"></i>
+                </div>
+
+            </div>
+            <!--Distance in km/mi according to route-->
+
+            <div class="poi-desc" ng-class="poi.gallery.length>0?'':'poi-desc-down'">
+
+
+                <div class="row">
+                    <div class="col-80 col-center">
+                        <h3 class="stable">{{poi.name}} <span class="seen" ng-if="inSeen(poi.id)" ng-click="removeSeen(poi.id);$event.stopPropagation()">seen</span></h3>
+                    </div>
+                </div>
+
+                <div class="row poi-type">
+                    <div class="col-80 col-center">
+                        <small>{{poi.type_name}}</small>
+                    </div>
+                </div>
+                <div class="row poi-type" ng-if="poiDataList[poi.id].partner_id>0">
+                    <div class="col-50 col-center">
+                        <span class="superpink-color">Special Offer <i class="ion-ios-pricetags"></i><br><br>
+                        </span>
+                    </div>
+                    <div class="col-50 col-center">
+                        <button class="button superpink-color button-small button-dark-outline" ng-click="enterPINShow(poi.id);">Place an order</button>
+                    </div>
+                </div>
+
+                <div class="row poi-rating stars">
+                    <div class="col">
+                        <i ng-repeat="star in stars" ng-if="star>=0" class="ion-ios-star"></i><i  class="ion-ios-star-half" ng-if="showhalf" ></i><i ng-repeat="star in stars" ng-if="star<0" class="ion-ios-star-outline"></i>
+                        {{roundDec(ranks.avg)}}<br>
+                        <button class="button button-small rating-button" ng-if="!rank_set" ng-click="openRankSetup()">Rate this poi</button>
+                    </div>
+                </div>
+
+                <div class="row poi-rating rates">
+                    <div class="col">
+                        {{num_ranks}} rates
+                    </div>
+                </div>
+
+
+
+                <p>
+                    {{poi.description | htmlToPlaintext}}
+                </p>
+                <br>
+
+                <div class="row poi-address">
+                    <div class="col-center">
+                        <h3>
+                            <small>{{poi.name}}</small>
+                        </h3>
+
+
+                        <span ng-if="poi.address.address1!=''">{{poi.address.address1}}<br></span>
+                        <span ng-if="poi.address.post_code!=''">{{poi.address.post_code}}<br></span>
+                        <span ng-if="poi.address.city!=''">{{poi.address.city}}<br></span>
+                        <span ng-if="poi.address.country!=''">{{poi.address.country}}<br></span><br>
+                        <span ng-if="poi.contact.email!=''" class="coordinates"><a ng-href="mailto: {{poi.contact.email}}">e-mail: {{poi.contact.email}}</a><br></span>
+                        <span ng-if="poi.contact.fax!=''">fax: {{poi.contact.fax}}<br></span>
+                        <span ng-if="poi.contact.mobile!=''"><a ng-href="tel:{{poi.contact.mobile}}">mobile: {{poi.contact.mobile}}</a><br></span>
+                        <span ng-if="poi.contact.telephone!=''"><a ng-href="tel:{{poi.contact.telephone}}">"telephone: {{poi.contact.telephone}}</a><br></span>
+                        <span ng-if="poi.contact.name!=''">Contact name: {{poi.contact.email}}<br></span><br>
+                        <span ng-if="poi.opening_hours!=''">Open: {{poi.opening_hours}} </span>
+                        <br>
+                        <br>
+
+                        {{poi.visit_duration}}
+                        <br>
+                        <br>
+                        <span ng-if="poi.details.facebook!='' && poi.details.facebook!=null"><a ng-href="{{poi.details.facebook}}"><i
+                                class="ion-social-facebook" ></i></a></span>
+                        <span ng-if="poi.details.instagram!='' && poi.details.instagram!=null"><a ng-href="{{poi.details.instagram}}"><i
+                                class="ion-social-instagram-outline"></i></a></span>
+                        <span ng-if="poi.details.pinterest!='' && poi.details.pinterest!=null"><a ng-href="{{poi.details.pinterest}}"><i
+                                class="ion-social-pinterest"></i></a></span>
+                        <span ng-if="poi.details.twitter!='' && poi.details.twitter!=null"><a ng-href="{{poi.details.twitter}}"><i
+                                class="ion-social-twitter"></i></a></span>
+                        <span ng-if="poi.details.wikipedia!='' && poi.details.wikipedia!=null"><a ng-href="{{poi.details.wikipedia}}"><i
+                                class="fa fa-wikipedia-w"></i></a></span>
+                        <span ng-if="poi.details.youtube!='' && poi.details.youtube!=null"><a ng-href="{{poi.details.youtube}}"><i
+                                class="fa-youtube"></i></a></span>
+                        <br><br><br><br><br><br><br>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </ion-content>
+
+
+    <div class="bar bar-footer dark-bg full-button-footer two-buttons" ng-if="true"> <!--ng-if="poi.distance>inside_dist">-->
+
+        <div class="col-50">
+
+
+            <button class="button button-left full-width button-full"
+                    ng-click="gotoCurrentTrip();takeMeThere(poi.id, true);closeDetail();"
+
+
+            >Take me here
+                <span ng-if="inTripList(poi.id)">first</span>
+            </button>
+
+
+        </div>
+        <div class="col-50">
+            <div class="or">
+                <img ng-src="img/or-sm.png">
+            </div>
+            <button ng-if="!inTripList(poi.id)" class="button button-dark button-right full-width button-full"
+                    ng-click="toggleAddPoiToTrip(poi.id);$event.stopPropagation()">
+                Add to<br> current rip
+            </button>
+            <button ng-else class="button button-dark button-right-add full-width button-full"
+                    ng-click="toggleAddPoiToTrip(poi.id);$event.stopPropagation()">
+                Remove from trip
+            </button>
+        </div>
+
+
+    </div>
+
+    <div ng-else class="bar bar-footer dark-bg full-button-footer ">
+
+        <a href="" class="full-width">
+            <button class=" button button-full full-width"
+                    ng-click="enterPINShow(poi.id);"
+            >Place an order
+            </button>
+        </a>
+
+    </div>
+</ion-view>
+
+<script type="text/ng-template" id="poi_gallery_renderer">
+    <ion-slide-box on-slide-changed="slideChanged(index)">
+        <ion-slide ng-repeat="img in poi.gallery">
+            <div class="galwrapper" style="background-image: url({{baseURL+img.image.image_medium}});"></div>
+        </ion-slide>
+    </ion-slide-box>
+</script>
+
+
+

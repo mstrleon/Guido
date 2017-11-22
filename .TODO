@@ -1,0 +1,170 @@
+TODO:
+
+DONE 1. Stylise all app in dark scheme
+
+2. DONE Look other way of ngResource implementation  --- for what??  -----
+
+DONE 3. Make Add button toggable and perform action.
+
+DONE 4. Hide images that not exist.
+
+5. Stylise images in better way, so they look more like in android app.
+
+DONE 6. Remove ion-tree-list from Bower
+
+DONE 7. POis are getting hidden when we click on fat group several times (newtrip).
+
+DONE 8. Mess with arrow-icons (newtrip)
+
+!!!! 9.!   Northeastern Slovenia does not have anything but still is shown.  Also two others shown with nothing in it.
+One Undefined Poi not found but still shown.
+
+DONE 10. Refactoring: Async queries, Better Poidata Array implementation.
+
+11. DONE Refactoring: better naming for methods and functions.
+
+DONE 12. Poi Details Viewй or Modal. Implement a Modal with POI detail. Everywhere it is needed.
+
+DONE 13!. Add to Trip in History.
+
+DONE 14!. It Does not switch to Create Trip on Header.
+
+DONE 15. Separate service for PoiData Cashing.
+
+DONE 16. Remove unused states in app.js
+
+DONE 17!!!!. FIX / api issue!
+
+NOPE 18. Refactoring: Put into separate folder and files all services/controllers ( maybe ?)
+
+DONE 19. Implement Trip markers on the map.
+
+DONE 20. New implementation of services acts buggy - consider switching off unnecesary stuff and then try again,
+or write separate module.
+
+----
+
+NOPE 21. Add angular-cached-resource module to cache all the requests.
+
+DONE 22. Как передать большой массив данных между контроллерами/вьюхами? Bring poidata to $rootscope
+
+DONE 23. Map controller - eliminate markers reload. ( for faster/cleaner work )
+
+DONE 24. Map controller - Map and routing should be initialized at application startup. Otherwise -
+opening map view needed.
+
+25.  SHOW Progress in calculating route
+
+26. DONE Laggy in Geolocation
+
+27. DONE Change minus and plus for galka and box
+
+ ? 28. Parent show on poi detail modal
+
+29. ?
+Implement Big pic Gallery for photos in poi detail.
+
+30. ?Change PX to % in map
+
+DONE !31. Look different screen sizes and match it
+
+32. DONE Implement 'take me there in Poidetail
+
+33. NON ? Implement "add to trip" which trip selector popover
+
+34. DONE on popover on map <img onclick='poiDetailShow("+wp.id+")' not working
+
+DONE 35. ? Make Poidetail showmodal as service
+
+36. DONE Make link to poidetail in map marker popover.
+
+37. DONE in Currennt Trip "load another "   reruns Saved Trips controller
+
+38.  DONE Saved trips load pixdtes
+
+!40.
+   DONE - confirmation delete trip popover
+   DONE  - confirmation load trip popover
+    DONE- confirmation delete poi popover
+    - ? rename trip
+
+41. DONE Pull changes from bitbuchet to server.
+
+42. DONE More info in POIdetail View.
+
+DONE 43. Add pic with LOADING icon
+
+!!!  44. Something like 'Calculating Route' preloader on map
+
+!!!!!45. too far - offer use google maps. And make it work! Block the routing.
+
+46. DONE Poidata save into cache. $localStorage
+
+DONE 47. Poitype filter connect it with id, not with english name.
+
+48. DONE Do a preload on start of a tree and poidata.
+
+49. NONE Add parallax effect on CitySelect
+
+50. DONE StoredData -> load markers, then on Poidata loaded -> reload markers or load only new
+
+DONE 51. Load only necesary data Poidata
+
+DONE 52. Clicks on dest icon - fires opening of regular accordinlgy
+!53. Latlng error on startup
+!54. Fix manager pin enter and adequate distance - now POST eror
+
+DONE !55. Pix should not stretch
+56. move to svg all icons
+
+!!! 57. make triangle for city
+
+!58. Check all  app and build for both platforms.
+!59. DONE make geoloc constantly running.
+DONE !60. Compass rotation.
+62. DONE Filter by poi type on map. And stylise buttons.
+NONE !63. Filter by distance
+DONE !64. Filter by time
+DONE 65. Calc total trip length.
+DONE !66. Mark seen when stays for 5 mins near.
+DONE 67. Alert special.
+-68. Zoom level on map. - POSTPONED
+69. browse all option and priority.
+DONE 70. Add analytics.
+DONE !71. Overflow  with big markers - cannot overclick. laggy. Maybe second click - unselects marker?
+72. 'OR' image not nice scaling
+DONE 73.!!!!   OrderBy dist is static
+74. DONE  Stylize ranges
+75. Clean directories
+76. Clean code
+
+DONE 77. picture in map footer stretch
+
+DONE 78. Check connection before loading
+
+DONE 79. Clickable push or noticable with alert and redirect
+
+DONE 80. poi detail  - header like shit in iOS version
+
+81. retina? - then big pics
+
+
+82. route_off button below with no stripes
+
+83. $rootScope.showMessage  error sometimes
+
+85. Switches between Grouped and Browse all are on different distances, reset to all platforms
+
+
+
+
+
+
+
+
+
+
+
+
+
+

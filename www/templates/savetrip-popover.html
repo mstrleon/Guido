@@ -1,0 +1,45 @@
+<ion-popover-view>
+
+    <form ng-submit="confirmSaveTrip();" name="confirmsave" id="saveForm">
+
+    <ion-header-bar>
+        <h1 class="title">Saving current trip</h1>
+    </ion-header-bar>
+    <ion-content class="padding">
+       <!-- <ul class="poilist">
+            <li ng-repeat="poi in TripList">{{poi.name}}</li>
+        </ul>-->
+
+<br/><br/>
+        <div class="list">
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Name of the trip:</span>
+                <input type="text" placeholder="Tap to name the trip" ng-model="trName.text" name="trName" >
+            </label>
+
+        </div>
+
+    </ion-content>
+
+    <div class="bar bar-footer" id="popover">
+
+            <div class="col-50">
+                <button class=" button button-outline button-dark full-width less-height"
+                        type="submit"
+                        >
+                    Save
+                </button>
+            </div>
+            <div class="col-50">
+
+                <button class=" button  button-outline button-dark   full-width"
+                        ng-click="closeSaveTripPopover()"
+                ng-model="tripName"
+                >Cancel
+                </button>
+
+            </div>
+    </div>
+</form>
+</ion-popover-view>

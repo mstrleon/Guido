@@ -1,0 +1,40 @@
+{
+  "name": "ionic-img-cache",
+  "main": "ionic-img-cache.js",
+  "version": "1.2.2",
+  "homepage": "https://github.com/vitaliy-bobrov/ionic-img-cache",
+  "authors": [
+    "Vitaliy Bobrov <bobrov1989@gmail.com>"
+  ],
+  "description": "Ionic images caching directive based on imgcache.js library.",
+  "moduleType": [],
+  "keywords": [
+    "ionic",
+    "mobile",
+    "angular",
+    "cordova",
+    "phonegap",
+    "angularjs",
+    "html5",
+    "imgcache",
+    "imgcache.js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "imgcache.js": "^1.0.0"
+  },
+  "_release": "1.2.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.2.2",
+    "commit": "9a175b5425cbafe50ea9b1691f8bc60c46199566"
+  },
+  "_source": "https://github.com/vitaliy-bobrov/ionic-img-cache.git",
+  "_target": "^1.2.2",
+  "_originalSource": "ionic-img-cache",
+  "_direct": true
+}

@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'CallunaSansLight';
+    src: url('CallunaSansLight.eot');
+    src: url('CallunaSansLight.eot') format('embedded-opentype'),
+    url('CallunaSansLight.woff2') format('woff2'),
+    url('CallunaSansLight.woff') format('woff'),
+    url('CallunaSansLight.ttf') format('truetype'),
+    url('CallunaSansLight.svg#CallunaSansLight') format('svg');
+}
+
+@font-face {
+    font-family: 'CallunaSansRegular';
+    src: url('CallunaSansRegular.eot');
+    src: url('CallunaSansRegular.eot') format('embedded-opentype'),
+    url('CallunaSansRegular.woff2') format('woff2'),
+    url('CallunaSansRegular.woff') format('woff'),
+    url('CallunaSansRegular.ttf') format('truetype'),
+    url('CallunaSansRegular.svg#CallunaSansRegular') format('svg');
+}
+
+@font-face {
+    font-family: 'CallunaSansItalic';
+    src: url('CallunaSansItalic.eot');
+    src: url('CallunaSansItalic.eot') format('embedded-opentype'),
+    url('CallunaSansItalic.woff2') format('woff2'),
+    url('CallunaSansItalic.woff') format('woff'),
+    url('CallunaSansItalic.ttf') format('truetype'),
+    url('CallunaSansItalic.svg#CallunaSansItalic') format('svg');
+}
+
+@font-face {
+    font-family: 'CallunaSansItalic';
+    src: url('CallunaSansItalic.eot');
+    src: url('CallunaSansItalic.eot') format('embedded-opentype'),
+    url('CallunaSansItalic.woff2') format('woff2'),
+    url('CallunaSansItalic.woff') format('woff'),
+    url('CallunaSansItalic.ttf') format('truetype'),
+    url('CallunaSansItalic.svg#CallunaSansItalic') format('svg');
+}
+
+@font-face {
+    font-family: 'CallunaSansSemiBold';
+    src: url('CallunaSansSemiBold.eot');
+    src: url('CallunaSansSemiBold.eot') format('embedded-opentype'),
+    url('CallunaSansSemiBold.woff2') format('woff2'),
+    url('CallunaSansSemiBold.woff') format('woff'),
+    url('CallunaSansSemiBold.ttf') format('truetype'),
+    url('CallunaSansSemiBold.svg#CallunaSansSemiBold') format('svg');
+}

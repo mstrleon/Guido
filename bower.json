@@ -1,0 +1,16 @@
+{
+  "name": "Guido",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.3.3"
+  },
+  "dependencies": {
+    "ion-tree-list": "^0.0.11",
+    "Ionicons": "ionicons#^2.0.1",
+    "leaflet-routing-machine": "^3.2.5",
+    "font-awesome": "^4.7.0",
+    "Leaflet.EasyButton": "^2.2.0",
+    "angular-material": "^1.1.4",
+    "ionic-img-cache": "^1.2.2"
+  }
+}

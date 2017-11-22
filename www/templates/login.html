@@ -1,0 +1,98 @@
+<ion-view title="Enter manager PIN" class="stable" >
+
+
+  <ion-header-bar class="header dark-bg stable login-header">
+    <h1 class="title stable"></h1>
+
+  </ion-header-bar>
+
+
+  <ion-content class="login"
+               overflow-scroll="false">
+
+    <div class="" ng-if="true">
+      <div class="poloski" ng-if="!showspin">
+        <div class="row row-asteriscs">
+          <div class="asterisk asterisk-4 col-100" ng-if="pinarray.length==0">&nbsp;</div>
+          <div class="asterisk asterisk-1 col-25" ng-if="pinarray.length>3">*</div>
+          <div class="asterisk asterisk-2 col-25" ng-if="pinarray.length>2">*</div>
+          <div class="asterisk asterisk-3 col-25" ng-if="pinarray.length>1">*</div>
+          <div class="asterisk asterisk-4 col-25" ng-if="pinarray.length>0">*</div>
+        </div>
+        <div class="row row-dashes">
+          <div class="dash col-25">_</div>
+          <div class="dash col-25">_</div>
+          <div class="dash col-25">_</div>
+          <div class="dash col-25">_</div>
+        </div>
+        <div class="row row-login-desc">
+          <div class="login-desc col-100">
+            enter your pin
+          </div>
+        </div>
+      </div>
+
+      <div id="usr-spinner" ng-if="showspin"><span us-spinner="{radius:8, width:5, length: 8, top:4, color:'white'}"></span></div>
+
+      <div class="dial-buttons">
+        <div class="row">
+          <div class="col-33" ng-click="dial(1)">
+            <div class="numbutton">1</div>
+          </div>
+          <div class="col-33" ng-click="dial(2)">
+            <div class="numbutton">2</div>
+          </div>
+          <div class="col-33" ng-click="dial(3)">
+            <div class="numbutton">3</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-33" ng-click="dial(4)">
+            <div class="numbutton">4</div>
+          </div>
+          <div class="col-33" ng-click="dial(5)">
+            <div class="numbutton">5</div>
+          </div>
+          <div class="col-33" ng-click="dial(6)">
+            <div class="numbutton">6</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-33" ng-click="dial(7)">
+            <div class="numbutton">7</div>
+          </div>
+          <div class="col-33" ng-click="dial(8)">
+            <div class="numbutton">8</div>
+          </div>
+          <div class="col-33" ng-click="dial(9)">
+            <div class="numbutton">9</div>
+          </div>
+        </div>
+        <div class="row lastrow">
+          <div class="col-33">
+            <div class="numbutton empty"></div>
+          </div>
+          <div class="col-33" ng-click="dial(0)">
+            <div class="numbutton">0</div>
+          </div>
+          <div class="col-33">
+            <div class="numbutton empty"></div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+  </ion-content>
+
+
+  <div class="bar bar-footer login-footer">
+    <div class="row"><div class="col-100 inner"><img ng-src="img/guido_name_logo.png"></div></div>
+    <div class="row guido-desc"><div class="col-100 inner">Your Personal Tourist Guide</div></div>
+  </div>
+
+
+</ion-view>

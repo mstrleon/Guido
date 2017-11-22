@@ -1,0 +1,287 @@
+<ion-side-menus enable-menu-with-back-views="true" class="dark-bg">
+    <ion-side-menu-content class="dark-bg">
+        <ion-nav-bar class="dark-bg">
+
+
+            <ion-nav-buttons side="left">
+                <button class="button button-icon dark-bg ion-navicon" menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
+
+            <ion-nav-title>
+                <span>{{page.title}}</span>
+            </ion-nav-title>
+
+
+            <ion-nav-buttons side="right">
+                <button class="button button-icon dark-bg ion-gear-a" menu-toggle="right" ng-if="true">
+                </button>
+            </ion-nav-buttons>
+
+        </ion-nav-bar>
+
+
+        <ion-nav-view name="mainContent" class="dark-bg" overflow-scroll="false" ng-if="AllDataLoaded"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left" class="">
+
+        <ion-content overflow-scroll="false">
+            <ion-list>
+
+                <ion-item class="item-dark" menu-close href="#/app/newtrip">
+                    Create a New Trip
+                </ion-item>
+
+                <ion-item class="item-dark" menu-close href="#/app/mapview">
+                    View Map
+                </ion-item>
+
+                <ion-item class="item-dark" menu-close href="#/app/currenttrip">
+                    Current Trip
+                </ion-item>
+                <ion-item class="item-dark" menu-close href="#/app/savedtrips">
+                    Saved Trips
+                </ion-item>
+                <ion-item class="item-dark" menu-close href="#/app/nearme" ng-click="nearMeCheck();">
+                    Near Me
+                </ion-item>
+                <ion-item class="item-dark item-last" menu-close href="#/app/history">
+                    History
+                </ion-item>
+                <ion-item class="item-dark item-last" menu-close href="#/app/favorites">
+                    Favorites
+                </ion-item>
+                <ion-item class="item-dark item-last" menu-close ng-click="logout()" href="#">
+                    Log Out
+                </ion-item>
+
+                <!-- <ion-item menu-close class="item-dark" href="#/app/mostvisited">
+                     Most Visited
+                 </ion-item>-->
+
+                <ion-item class="item-dark item-button">
+                    <button class="button-block" menu-close ng-click="gotoMap();takeToHotel();">Take me to my hotel
+                    </button>
+                </ion-item>
+
+                <!--<ion-item menu-close class="item-divider" ng-click="logout()">
+                    Log Out
+                </ion-item>-->
+            </ion-list>
+
+
+            <!-- TODO implement button 'Take me to my home -->
+        </ion-content>
+
+
+    </ion-side-menu>
+
+
+    <ion-side-menu side="right" class="dark-bg menu-right" ng-if="true"><!--show only on 'create trip' poilist-->
+
+        <ion-content ng-controller="PoiFilterController" overflow-scroll="false">
+            <!-- ng-if="page.current.name != 'app.currenttrip'">-->
+            <div class="list dark-bg">
+
+
+                <div class="item dark-bg range-box" ng-show="page.current.name == 'app.newtrip'">
+                    <h1>How much time do you have?</h1>
+                    <div class="item range dark">
+                        <input type="range" min="0" max="13"
+                               ng-model="time_for_visit"
+                               ng-change="timeForVisitChanged(time_for_visit)" ;
+                        >
+                    </div>
+
+                    <div class="slider-double" ng-style="{'padding-left':time_for_visit*12+'px'}">
+                        <div class="slider-double-inner"
+
+                        >{{time_for_visit<13?time_for_visit<1?'&nbsp;':time_for_visit+
+                            'hour'+(time_for_visit>1?'s':''):'&nbsp;'}}
+                        </div>
+                    </div>
+                    <div class="row range-label">
+                        <div class="col-20" ng-class="time_for_visit>0?'grey':''">
+                            <div ng-if="true">Less than<br>an hour</div>
+                            &nbsp;
+                        </div>
+
+                        <div class="col-60">
+                            &nbsp;
+                        </div>
+                        <div class="col-20 range-label-right" ng-class="time_for_visit!=13?'grey':''">
+                            <div ng-if="true">Whole<br>day</div>
+                            &nbsp;
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="item dark-bg range-box shorter-longer-visit"
+                     ng-show="page.current.name != 'app.history' || page.current.name != 'app.mapview'">
+
+                    <h1>Do you prefer shorter<br> or longer visits?</h1>
+                    <div class="item range dark">
+                        <input type="range" min="0" max="2"
+                               ng-model="shorter_longer_visit"
+                               name="shorter_longer_visit"
+                               ng-change="timeVisitMove(shorter_longer_visit)" ;
+                        >
+                    </div>
+
+
+                    <div class="slider-double-inner" id="shorter-longer"
+
+                    >{{shorter_longer_visit==1?'I can do both':'&nbsp;'}}
+                    </div>
+
+                    <div class="row range-label">
+                        <div class="col-20" ng-class="shorter_longer_visit!=0?'grey':''">
+                            <div ng-if="true">Shorter</div>
+                            &nbsp;
+                        </div>
+
+                        <div class="col-60">
+                            &nbsp;
+                        </div>
+                        <div class="col-20 range-label-right" ng-class="shorter_longer_visit!=2?'grey':''">
+                            <div ng-if="true">Long</div>
+                            &nbsp;
+                        </div>
+                    </div>
+
+                </div>
+<!--ng-show="page.current.name == 'app.mapview' && TripList.length>0"-->
+
+                <div class="item dark item-menu-toggle"
+                     ng-show="page.current.name == 'app.mapview' && TripList.length>0"
+                     ng-controller="MapMenuController">
+
+                    <h1>Would you like to go somewhere specific or just discover around?</h1>
+                    <div class="row show-route">
+                        <div class="col-30 switch-titles switch-titles-right" ng-click="toggleRouteOff(false)"
+                             ng-class="route_off?'grey':''">
+                            Trip is ON
+                        </div>
+                        <div class="col-40">
+                            <label class="toggle toggle-assertive toggle-normal" ng-click="toggleRouteOff()">
+                                <input type="checkbox">
+                                <div class="track">
+                                    <div class="handle"></div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="col-30 switch-titles" ng-click="toggleRouteOff(true)" ng-class="route_off?'':'grey'">
+                            Trip is OFF
+                        </div>
+                    </div>
+
+                    <div class="row row-trip-current" ng-show="!route_off">
+                        <div class="col-20 pull-left"
+                             ng-click="movePoiCurrentIndexLeft()"
+                        >
+                            <i class="ion-android-arrow-back" ng-show="TripPoiCurrentIndex!=0"></i>
+                        </div>
+                        <div class="col-60 trip-current-poi" ng-click="toggleFocus(TripList[TripPoiCurrentIndex].id)">
+                            {{TripList[TripPoiCurrentIndex].name}}
+                        </div>
+                        <div class="col-20 pull-right"
+                             ng-click="movePoiCurrentIndexRight()"
+                        >
+                            <i ng-show="TripPoiCurrentIndex<(TripList.length-1)"
+                               class="ion-android-arrow-forward"></i>
+                        </div>
+                    </div>
+                    <div class="row row-trip-current-calculs" ng-show="!route_off">
+                        <div class="col-20 current-poi-before">{{TripPoiCurrentIndex}} before</div>
+                        <div class="col-60 current-poi" ng-click="">Current POI</div>
+                        <div class="col-20 current-poi-after">{{TripList.length-TripPoiCurrentIndex-1}} after</div>
+                    </div>
+
+                </div>
+
+
+                <div class="item dark-bg item-dark item-button"
+                     ng-show="page.current.name != 'app.mapview' || !route_off">
+
+                    <a href="#/app/currenttrip" menu-close>
+                        <button class="button-block">Edit current trip
+                        </button>
+                    </a>
+
+
+                    <!--  <h1>Ongoing trip</h1>
+
+
+                      <div class="row current-trip">
+                          <div class="col-20">
+
+                          </div>
+                          <div class="col-60">
+                              Current POI
+                          </div>
+                          <div class="col-20 range-label-right">
+                              <i class="ion-"
+                          </div>
+                      </div>
+
+
+                      <div class="row range-label">
+                          <div class="col-20">
+                              {{num_left}} visited
+                          </div>
+
+                          <div class="col-60">
+                              Current POI
+                          </div>
+                          <div class="col-20 range-label-right">
+                              {{num_right}} remaining
+                          </div>
+                      </div>-->
+                </div>
+
+
+                <div class="item dark-bg tags">
+                    <h1>Chosen interests:</h1>
+                    <button ng-repeat="type in poitypes"
+                            class="button button-small filter-buttons"
+                            ng-click="toggleSel(type.id)"
+                            ng-class="isTypeSelected(type.id)?'button-balanced':'button-light button-outline';"
+                            ng-style="isTypeSelected(type.id)?
+                        {'background-color':marker_types[type.id-1].color}
+                        :{'background-color':'#141414', 'color':'white'}"
+                    >
+                        {{type.name}}
+                    </button>
+                </div>
+                <div class="item dark item-menu-toggle">
+                    <h1>How would you like<br> your pois to be listed?</h1>
+
+                    <div class="row">
+                        <div class="col-30 switch-titles switch-titles-right" ng-click="list_by_distance=false"
+                             ng-class="list_by_distance?'grey':''">
+                            By<br>name
+                        </div>
+                        <div class="col-40">
+                            <label class="toggle toggle-assertive toggle-normal">
+                                <input type="checkbox" name="list_by_distance" ng-model="list_by_distance">
+                                <div class="track">
+                                    <div class="handle"></div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="col-30 switch-titles" ng-click="list_by_distance=true"
+                             ng-class="list_by_distance?'':'grey'">
+                            By<br>distance
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </ion-content>
+    </ion-side-menu>
+
+
+</ion-side-menus>

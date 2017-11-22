@@ -1,0 +1,72 @@
+<ion-view title="Trip Detail" class="stable">
+
+
+    <ion-header-bar class="header dark-bg stable tripdetail-header">
+        <h1 class="title stable">{{tripparent}} trip</h1>
+        <div class="buttons pull-right">
+            <button class=" button button-stable button-icon icon-right ion-android-close"
+                    ng-click="closeTripDetail()"
+            ></button>
+        </div>
+    </ion-header-bar>
+
+
+    <ion-content class="dark-bg " overflow-scroll="false">
+
+        <ion-list class="poi-list" ng-repeat="poi in trip.poiList">
+            <div class="item item-text-wrap item-poi" ng-click="" >
+
+                <div class="image" ng-click="poiDetailShow(poi.id)">
+                    <img src="img/image-not-avail.jpg" err-src="img/image-not-avail.jpg"
+                         ion-img-cache ng-src="{{baseURL+poiDataList[poi.id].image_medium}}">
+
+                         <small class="poi-desc-small">
+                                {{item.headline}}
+                         </small>
+
+                </div>
+
+
+                <div class="poi-add-row">
+                    <div class="poi-add">
+                        <img class="poi-add-button"
+                             ng-src="{{inTripList(poi.id)?
+                                              'img/add-poi-galka.png' : 'img/add-poi-plus.png'}}"
+                             ng-click="toggleAddPoiToTrip(poi.id);$event.stopPropagation()"
+                        >
+                    </div>
+                </div>
+
+
+
+
+                <div class="poi-desc-row">
+                    <div class="poi-name">{{poiDataList[poi.id].name}} <span class="seen" ng-if="inSeen(poi.id)">seen</span></div>
+                    <div class="poi-type">{{poiDataList[poi.id].type_name}}
+                        <span class="superpink-color coupon-tag" ng-if="poiDataList[poi.id].partner_id>0">Special Offer <i class="ion-ios-pricetags"></i></span></div>
+                </div>
+
+            </div>
+
+
+        </ion-list>
+        <br><br><br><br><br><br><br>
+
+    </ion-content>
+
+    <div class="bar bar-footer dark-bg ">
+        <div class="bar bar-footer dark-bg full-button-footer ">
+
+            <a href="" ng-click="loadTrip(trip); " menu-close ng-click="" class="full-width">
+                <button class=" button button-full full-width"
+                >Start this trip
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+</ion-view>
+
+
+

@@ -1,0 +1,141 @@
+<ion-view>
+
+    <ion-nav-bar class="dark-bg">
+        <ion-nav-back-button class="dark-bg">
+        </ion-nav-back-button>
+
+        <ion-nav-buttons side="left">
+            <button class="button button-icon dark-bg ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+
+        <ion-nav-title>
+            <div class="title-div-img" ng-if="page.current.name == 'app.mapview'">
+                <img ng-src="img/guido_name_logo.png" class="img-title">
+            </div>
+
+            <span ng-else>{{page.title}}</span>
+        </ion-nav-title>
+
+
+        <ion-nav-buttons side="right">
+            <button class="button button-icon dark-bg ion-gear-a" menu-toggle="right" ng-if="true">
+            </button>
+        </ion-nav-buttons>
+
+    </ion-nav-bar>
+
+
+    <ion-content data-tap-disabled="true" overflow-scroll="false" style="background-color:#141414">
+        <div ng-if="AllDataLoaded">
+
+        <leaflet style="height: 570px"
+                 defaults="map.defaults"
+                 center="map.center"
+                 markers="map.mrkrs"
+                 tiles="map.tiles"
+                 ng-if="map"></leaflet>
+
+        </div>
+        <!--{{mrkrs}}-->
+
+    </ion-content>.
+
+    <div class="bar bar-footer footer-map" ng-class="footer_tall?'footer-tall':'footer-short'">
+        <div ng-if="showmessage" class="show-map-message">
+
+                <button class="button-icon close-map-message icon ion-android-close button-small stable go-down" ng-click="minimiseFooter()"
+                        ng-if="footer_tall"></button>
+
+            <div class="footer-message row"> <!--if show_message==true-->
+                {{footerMessage}}
+            </div>
+            <div class="button-row row">
+                <div class="trip-dist col-20">
+                    {{(TripDistance)}} <span ng-if="(TripDistance>0)">km</span><br>
+                    {{TripTime}}
+                </div>
+                <div class="col-80" >
+                    <button class="button icon ion-map button-dark" id="navigate-google" ng-click="showPoiRedirectPopup()">
+                        <span style="">   Navigate in {{NativeMapApp}}</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div ng-if="!showmessage && footer_tall" class="map-poi-desc">
+
+            <button class="button-icon button-close icon ion-android-close button-small stable go-down" ng-click="minimiseFooter()"
+                    ng-if="footer_tall"></button>
+
+            <div class="item-thumbnail-left item-map-desc" ng-click="poiDetailShow(poi.id)">
+                <img src="img/image-not-avail.jpg" err-src="img/image-not-avail.jpg"
+                      ng-src="{{baseURL+poiDataList[poi.id].image_thumb}}" alt="">
+                <!--Distance in km/mi according to route-->
+                <div class=row">
+                    <div class="col-center"> {{poiDataList[poi.id].name}} <span class="seen" ng-if="inSeen(poi.id)">seen</span></div>
+                </div>
+                <div class="row">
+                    <small><!--<i ng-class="'fa fa-{{markerTypes[poiDataList[poi.id].poi_type_id].icon}}'"></i>-->
+                        {{poiDataList[poi.id].type_name}}
+                        <span class="superpink-color coupon-tag" ng-if="poiDataList[poi.id].partner_id>0">Special Offer <i
+                                class="ion-ios-pricetags"></i></span>
+                        <br>({{poi.distance}} km)
+                    </small>
+                </div>
+            </div>
+
+
+
+
+            <div class="button-footer-container row">
+                <div class="trip-dist col-20">
+                    {{(TripDistance)}} <span ng-if="(TripDistance>0)">km</span><br>
+                    {{TripTime}}
+                </div>
+
+                <div class="col-38 add-to-container" >
+                    <button ng-if="inTripList(poi.id)" class="button icon  ion-ios-checkmark button-balanced"
+                            ng-click="toggleAddPoiToTrip(poi.id);$event.stopPropagation()"
+                    >In Current Trip
+                    </button>
+                    <button ng-else class="button icon ion-ios-plus-outline  button-dark"
+                            ng-click="toggleAddPoiToTrip(poi.id);$event.stopPropagation()">
+                        Add to Trip
+                    </button>
+
+                </div>
+
+                <div class="col-4">&nbsp;</div>
+
+                <div class="col-38 take-me-container">
+                    <button class="button button-stable" id="take_me"
+                            ng-click="takeMeThere(poi.id)"
+                    >Take me there
+                        <span ng-if="inTripList(poi.id)">first</span>
+                    </button>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div ng-if="!footer_tall" class="short-footer row">
+            <div class="trip-dist col-20">
+                {{(TripDistance)}} <span ng-if="(TripDistance>0)">km</span><br>
+                {{TripTime}}
+            </div>
+            <div class="col-80">
+                <button class="button icon ion-map button-dark" id="navigate-google" ng-click="showPoiRedirectPopup()">
+                    <span style="">   Navigate in {{NativeMapApp}}</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</ion-view>

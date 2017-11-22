@@ -1,0 +1,87 @@
+<ion-view>
+
+    <ion-nav-bar>
+
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+
+        <ion-nav-title>
+
+
+
+            <div  ng-if = "selcity !== -1">
+                <div class ="topview-title" >
+
+                   <!-- <img ion-img-cache ng-src="{{baseURL+selcity.image_thumb}}" />-->
+                    <button class="button button-stable dark" ng-click="citySelectShow()">
+                        {{selcity.name}}     <i class="fa fa-angle-down"></i>
+                    </button>
+
+                </div>
+            </div>
+
+        </ion-nav-title>
+
+        <ion-nav-buttons side="right">
+
+            <button class="button button-icon button-clear ion-search top-search" ng-if="true">
+            </button>
+
+            <button class="button button-icon button-clear ion-gear-a" menu-toggle="right" ng-if="true">
+            </button>
+        </ion-nav-buttons>
+
+
+    </ion-nav-bar>
+
+    <ion-content class="dark-bg">
+
+
+        <div class ="topview topview-init"  ng-if = "selcity == -1">
+
+
+            <button class="button button-stable dark button-small" ng-click="citySelectShow()">
+               Select a place    <i class="fa fa-angle-down"></i>
+            </button>
+        </div>
+
+<div  ng-if = "selcity !== -1">
+
+        <div class="card" ng-repeat="poi in selcity.pois">
+
+            <div class="item item-text-wrap item-thumbnail-left">
+                <img src="img/image-not-avail.jpg" err-src="img/image-not-avail.jpg"  ion-img-cache ng-src="{{baseURL+poiDataList[poi.poi_id].image_thumb}}" alt="">
+
+                <!--Distance in km/mi according to route-->
+
+                <div class="row">
+                    <div class="col-60 col-center"> {{poiDataList[poi.poi_id].name}}</div>
+
+                    <div class="col-20 col-center row-center">
+                        <button class="button button-icon icon ion-ios-information-outline"
+                                ng-click="poiDetailShow(poi.poi_id)"
+                        ></button>
+                    </div>
+
+                    <div class="col-20 col-center row-center">
+                        <button class="button button-icon icon "
+                                ng-class="inTripList(poi.poi_id)?
+                    'ion-ios-checkmark' : 'ion-ios-plus-outline'"
+                                ng-click="toggleAddPoiToTrip(poi.poi_id)"
+                        ></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <small>{{poiDataList[poi.poi_id].type_name}}</small>
+                </div>
+            </div>
+        </div>
+
+</div>
+    </ion-content>
+</ion-view>

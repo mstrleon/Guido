@@ -1,0 +1,105 @@
+<ion-view>
+
+    <ion-nav-bar class="dark-bg">
+        <ion-nav-back-button class="dark-bg">
+        </ion-nav-back-button>
+
+        <ion-nav-buttons side="left">
+            <button class="button button-icon dark-bg ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+
+        <ion-nav-title>
+
+            <span>{{page.title}}</span>
+        </ion-nav-title>
+
+
+    </ion-nav-bar>
+
+
+
+    <ion-content class="dark-bg" overflow-scroll="false">
+        <span class="stable" ng-show="TripList.length<1">Current Trip list is empty</span>
+
+        <ion-list class="poi-list" ng-repeat="poi in TripList">
+            <div class="item item-text-wrap item-poi" ng-click="" >
+
+                <div class="image" ng-click="poiDetailShow(poi.id)">
+                    <img src="img/image-not-avail.jpg" err-src="img/image-not-avail.jpg"
+                         ion-img-cache ng-src="{{baseURL+poiDataList[poi.id].image_medium}}">
+
+                    <small class="poi-desc-small">
+                        {{item.headline}}
+                    </small>
+
+                </div>
+
+                <div class="poi-add-row">
+                    <div class="poi-add">
+                        <img class="poi-add-button"
+                             ng-src="{{inTripList(poi.id)?
+                                              'img/add-poi-galka.png' : 'img/add-poi-plus.png'}}"
+                             ng-click="toggleAddPoiToTrip(poi.id);$event.stopPropagation()"
+                        >
+                    </div>
+                </div>
+
+
+                <div class="poi-desc-row">
+                    <div class="poi-name">{{poiDataList[poi.id].name}} <span class="seen" ng-if="inSeen(poi.id)">seen</span></div>
+                    <div class="poi-type">{{poiDataList[poi.id].type_name}}
+                        <span class="superpink-color coupon-tag" ng-if="poiDataList[poi.id].partner_id>0">Special Offer <i class="ion-ios-pricetags"></i></span></div>
+                </div>
+
+            </div>
+
+
+
+        </ion-list>
+        <br><br><br><br><br><br><br>
+
+
+
+
+
+    </ion-content>
+
+
+    <div class="bar bar-footer current-trip-footer">
+
+        <div class="bar bar-footer dark-bg ">
+            <div class="bar bar-footer dark-bg full-button-footer ">
+
+                <!--
+
+                <div class="col-50">
+                <a menu-close ng-click="saveTripPopover($event)" class="full-width">
+                    <button class=" button button-full full-width button-left"
+                    >Save This Trip
+                    </button>
+                </a>
+                </div>
+                <div class="col-50">
+                <div class="or">
+                    <img ng-src="img/or-sm.png">
+                </div>
+                <a href="#/app/mapview" menu-close class="full-width">
+                    <button class=" button button-full full-width button-right button-green"
+                    >View Trip on Map
+                    </button>
+                </a>
+                </div>
+-->
+                <a menu-close ng-click="saveTripPopover($event)" class="full-width">
+                    <button class=" button button-full full-width button-left"
+                    >Save This Trip
+                    </button>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</ion-view>

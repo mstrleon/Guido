@@ -1,0 +1,65 @@
+<ion-view>
+
+
+    <ion-nav-bar class="dark-bg">
+        <ion-nav-back-button class="dark-bg">
+        </ion-nav-back-button>
+
+        <ion-nav-buttons side="left">
+            <button class="button button-icon dark-bg ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+
+        <ion-nav-title>
+            <span>{{page.title}}</span>
+        </ion-nav-title>
+
+
+        <ion-nav-buttons side="right">
+            <button class="button button-icon dark-bg ion-gear-a" menu-toggle="right" ng-if="true">
+            </button>
+        </ion-nav-buttons>
+
+    </ion-nav-bar>
+
+    <ion-content class="dark-bg" overflow-scroll="false">
+        <ion-list class="poi-list" ng-repeat="poi in favorites">
+            <div class="item item-text-wrap item-poi" ng-click="" >
+
+                <div class="image" ng-click="poiDetailShow(poi.poi_id)">
+                    <img src="img/image-not-avail.jpg" err-src="img/image-not-avail.jpg"
+                         ion-img-cache ng-src="{{baseURL+poiDataList[poi.poi_id].image_medium}}">
+
+                    <small class="poi-desc-small">
+                        {{item.headline}}
+                    </small>
+
+                </div>
+
+                <div class="poi-add-row">
+                    <div class="poi-add">
+                        <img class="poi-add-button"
+                             ng-src="{{inTripList(poi.poi_id)?
+                                              'img/add-poi-galka.png' : 'img/add-poi-plus.png'}}"
+                             ng-click="toggleAddPoiToTrip(poi.poi_id);$event.stopPropagation()"
+                        >
+                    </div>
+                </div>
+
+                <div class="poi-desc-row">
+                    <div class="poi-name">{{poiDataList[poi.poi_id].name}}</div>
+                    <div class="poi-type">{{poiDataList[poi.poi_id].type_name}}
+                        <span class="superpink-color coupon-tag" ng-if="poiDataList[poi.poi_id].partner_id>0">Special Offer <i class="ion-ios-pricetags"></i></span></div>
+                    <button class="button button-icon icon ion-ios-trash-outline remove-poi"
+                            ng-click="removeFavorite(poi.poi_id)"
+                    ></button>
+                </div>
+
+            </div>
+
+        </ion-list>
+        <br><br><br><br><br><br><br>
+
+    </ion-content>
+
+</ion-view>

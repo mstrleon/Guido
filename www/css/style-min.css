@@ -1,0 +1,204 @@
+
+@media screen and (max-width : 380px) {
+
+    .city-row {
+        padding:0;
+        text-align:center;
+        margin:auto;
+        width:100%;
+        height: 280px;
+    }
+
+    .city-row img {
+
+        opacity:0.6;
+        object-fit: cover;
+        height:280px;
+        width:100%;
+
+
+    }
+
+    .city-row .image {
+
+    // width		: 100%; /* for IE 6 */
+        height:260px;
+        width:320px;
+        text-align:center;
+        overflow:hidden;
+        margin:auto;
+
+    }
+    .city-desc {
+        width:320px;
+        margin:auto;
+    }
+
+
+    .city-desc  h2 {
+        font-family: "CallunaSansRegular";
+        font-size:28px;
+        text-align:center;
+        color:white;
+        position	: absolute;
+        top		: 70px;
+    // padding-right:20px;
+        width:320px;
+
+    }
+
+    .city-desc-small {
+        position: relative;
+        top: -60px;
+        left: 0;
+        width: 100%;
+        font-size:90%;
+    }
+    .item-text-wrap.depth-1 {
+        padding-left:0;
+    }
+
+    .newtrip-list .item {
+        padding:0;
+        border:0;
+        margin:0;
+    //margin-left:-2px;
+    }
+    .newtrip-list {
+        float:inherit;
+    }
+    .city-row .symbol {
+        color:white;
+        position:relative;
+        top: -306px;
+        right:10px;
+        overflow:visible;
+        text-align:right;
+        font-size:280%;
+        z-index:1000;
+    }
+    .city-row .upup-symbol{
+        color:white;
+        position:relative;
+        top: -285px;
+        right:10px;
+        overflow:visible;
+        text-align:right;
+        font-size:280%;
+        z-index:1000;
+    }
+
+    .item-poi, item-trip {
+        background-color:#141414;
+        max-width:none;
+    //width:100%;
+    //height:280px;
+    }
+
+
+    .item-poi .image {
+        height:250px;
+        width:320px;
+        text-align:center;
+        overflow:hidden;
+        margin:auto;
+
+    }
+
+    .item-poi img, .item-trip img {
+        opacity:1;
+        height:100%;
+        width:100%;
+        object-fit: cover;
+    }
+
+    .item-poi .poi-add, .item-trip .poi-add  {
+        color:white;
+        position:relative;
+        bottom:26px;
+        right:8px;
+        text-align:right;
+        overflow:visible;
+    }
+    .poi-add-button:before  {
+
+    }
+
+    .poi-add-button {
+        height:50px !important;
+        width:50px  !important;
+        overflow:visible;
+        z-index:210;
+    }
+
+
+    .newtrip-list {
+        width: 320px;
+        margin: auto;
+    }
+
+    /*
+        .poi-list {
+            width: 320px;
+            margin: auto;
+        }
+
+
+        .poi-list image {
+            height:250px;
+            width:320px;
+            text-align:center;
+            overflow:hidden;
+            margin:auto;
+        }
+        .poi-list img {
+            opacity: 1;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }*/
+
+    .poi-desc-row {
+        width:320px;
+
+        overflow:visible;
+        margin:auto;
+
+        font-family: "CallunaSansRegular";
+        height:80px;
+        margin-top:-50px;
+        padding-left:15px;
+        margin-bottom:10px;
+    }
+
+    .poi-name {
+        padding-top:3px;
+    //margin-top: -5px;
+        font-size:18px;
+        color:white;
+
+    }
+    .poi-type {
+        color:#b3b3b3;
+        font-size:14px;
+        padding-top: 7px;
+    }
+    .poi-add-row {
+        position:relative;
+        top:3px;
+        width:320px;
+        margin:auto;
+
+    }
+    /*
+    .poi-list .poi-add-row {
+        position:relative;
+        top:3px;
+        width:320px;
+        margin:auto;
+
+    }*/
+
+
+}
+
